@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //to start, and restart the game
   function startGame() {
+    currentSnake = [2,1,0]
     currentSnake.forEach(index => squares[index].classList.remove('snake'))
     squares[appleIndex].classList.remove('apple')
     clearInterval(interval)
@@ -24,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     direction = 1
     scoreDisplay.innerText = score
     intervalTime = 1000
-    currentSnake = [2,1,0]
     currentIndex = 0
     currentSnake.forEach(index => squares[index].classList.add('snake'))
     interval = setInterval(moveOutcomes, intervalTime)
@@ -35,16 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //function that deals with ALL the ove outcomes of the Snake
   function moveOutcomes() {
 
-    //deals with snake hitting border and snake hitting self
-    if (
-      (currentSnake[0] + width >= (width * width) && direction === width ) || //if snake hits bottom
-      (currentSnake[0] % width === width -1 && direction === 1) || //if snake hits right wall
-      (currentSnake[0] % width === 0 && direction === -1) || //if snake hits left wall
-      (currentSnake[0] - width < 0 && direction === -width) ||  //if snake hits the top
-      squares[currentSnake[0] + direction].classList.contains('snake') //if snake goes into itself
-    ) {
-      return clearInterval(interval) //this will clear the interval if any of the above happen
-    }
+    checkSnakeDeath();
 
     const tail = currentSnake.pop() //removes last ite of the array and shows it
     squares[tail].classList.remove('snake')  //removes class of snake from the TAIL
@@ -67,6 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(interval)
       intervalTime = intervalTime * speed
       interval = setInterval(moveOutcomes, intervalTime)
+    }
+  }
+
+  //deals with snake hitting border and snake hitting self
+  function checkSnakeDeath(){
+    if (
+      (currentSnake[0] + width >= (width * width) && direction === width ) || //if snake hits bottom
+      (currentSnake[0] % width === width -1 && direction === 1) || //if snake hits right wall
+      (currentSnake[0] % width === 0 && direction === -1) || //if snake hits left wall
+      (currentSnake[0] - width < 0 && direction === -width) ||  //if snake hits the top
+      squares[currentSnake[0] + direction].classList.contains('snake') //if snake goes into itself
+    ) {
+      alert("GAME OVER! Your Score: " + score)
+      return clearInterval(interval) //this will clear the interval if any of the above happen
     }
   }
 
