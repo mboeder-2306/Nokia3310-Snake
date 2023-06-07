@@ -4,11 +4,21 @@
   display: flex;
   flex-wrap: wrap;
   border-style: solid;
+  background-color: #0c002b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  visibility: hidden;
+  transform: translate(-50%, -50%);
 }
 
 .grid div {
   width: 20px;
   height: 20px;
+}
+
+.score{
+  text-align: center;
 }
 
 .snake {
@@ -17,4 +27,95 @@
 
 .apple {
   background-color: purple;
+}
+
+#btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f3f3f3;
+  text-decoration: none;
+  font-size: 5vw;
+  padding: 2rem 4rem;
+  box-shadow: 0 30px 50px #1a0749;
+  overflow: hidden;
+  background-color: #0c002b;
+}
+
+#btn span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(to right, #0c002b, #1779ff);
+  animation: animate1 2s linear infinite;
+}
+
+@keyframes animate1 {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+#btn span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #0c002b, #1779ff);
+  animation: animate2 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes animate2 {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+#btn span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to left, #0c002b, #1779ff);
+  animation: animate3 2s linear infinite;
+}
+
+@keyframes animate3 {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+#btn span:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to top, #0c002b, #1779ff);
+  animation: animate4 2s linear infinite;
+  animation-delay: 1s;
+}
+@keyframes animate4 {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
 }

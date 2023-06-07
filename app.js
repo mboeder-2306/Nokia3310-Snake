@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const squares = document.querySelectorAll('.grid div')
-  const scoreDisplay = document.querySelector('span')
+  const scoreDisplay = document.querySelector('h2')
   const startBtn = document.querySelector('.start')
 
   const width = 10
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //to start, and restart the game
   function startGame() {
+    cleanUpBoard()
     currentSnake = [2,1,0]
     currentSnake.forEach(index => squares[index].classList.remove('snake'))
     squares[appleIndex].classList.remove('apple')
@@ -29,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     currentSnake.forEach(index => squares[index].classList.add('snake'))
     interval = setInterval(moveOutcomes, intervalTime)
     randomApple()
+    document.getElementById('btn').style.visibility = 'hidden'
+    document.getElementById('board').style.visibility = 'visible'
   }
 
 
@@ -71,10 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[currentSnake[0] + direction].classList.contains('snake') //if snake goes into itself
     ) {
       alert("GAME OVER! Your Score: " + score)
+      cleanUpBoard()
+      document.getElementById('btn').style.visibility = 'visible'
       return clearInterval(interval) //this will clear the interval if any of the above happen
     }
   }
 
+  function cleanUpBoard(){
+    squares.forEach(index => index.classList.remove('snake'))
+    currentSnake = [2,1,0]
+    forbiddenDirection = "ArrowLeft"
+    document.getElementById('board').style.visibility = 'hidden'
+  }
 
   //generate new apple once apple is eaten
   function randomApple() {
